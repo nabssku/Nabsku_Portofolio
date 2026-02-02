@@ -1,4 +1,4 @@
-import { getProjects, getAbout, getSkills, getExperiences, getSocialLinks } from '@/actions/dashboard';
+import { getProjects, getAbout, getSkills, getExperiences, getSocialLinks, getSeo } from '@/actions/dashboard';
 import { ProjectCard } from '@/components/project-card';
 import { Navbar } from '@/components/navbar';
 import { getUser } from '@/actions/auth';
@@ -6,6 +6,33 @@ import { Github, Linkedin, Mail, Code, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import type { Metadata } from 'next';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { data: seo } = await getSeo();
+
+  const title = seo?.title || 'Portfolio - Full Stack Developer';
+  const description = seo?.description || 'Experienced full stack developer specializing in React, Node.js, and modern web technologies';
+  const keywords = seo?.keywords || 'web development, react, nodejs, portfolio';
+  const ogImage = seo?.og_image || '/og-image.jpg'; // fallback image
+
+  return {
+    title,
+    description,
+    keywords,
+    openGraph: {
+      title,
+      description,
+      images: ogImage ? [{ url: ogImage }] : [],
+    },
+    twitter: {
+      card: seo?.twitter_card === 'summary_large_image' ? 'summary_large_image' : 'summary',
+      title,
+      description,
+      images: ogImage ? [ogImage] : [],
+    },
+  };
+}
 
 export default async function Home() {
   const { data: projects } = await getProjects();

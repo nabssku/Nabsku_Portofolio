@@ -18,6 +18,8 @@
 - [x] Create SEO form component
 - [x] Add SEO actions to dashboard
 - [x] Integrate SEO form into dashboard page
+- [x] Integrate SEO data into page metadata
+- [x] Update SEO form to load existing data
 - [ ] Run migration: supabase db push (requires Supabase CLI) - social_links table
 
 ## Social Media Links Management
