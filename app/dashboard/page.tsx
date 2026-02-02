@@ -1,16 +1,29 @@
-import { getDashboardStats, getShortLinks } from '@/actions/dashboard';
+import { getDashboardStats, getShortLinks, getSkills, getExperiences, getSocialLinks, getProjects } from '@/actions/dashboard';
 import { StatsCard } from '@/components/stats-card';
 import { AddProjectForm } from '@/components/add-project-form';
 import { AddShortLinkForm } from '@/components/add-short-link-form';
 import { ShortLinksTable } from '@/components/short-links-table';
+import { AboutForm } from '@/components/about-form';
+import { SeoForm } from '@/components/seo-form';
+import { AddSkillForm } from '@/components/add-skill-form';
+import { SkillsTable } from '@/components/skills-table';
+import { AddExperienceForm } from '@/components/add-experience-form';
+import { ExperiencesTable } from '@/components/experiences-table';
+import { AddSocialLinkForm } from '@/components/add-social-link-form';
+import { SocialLinksTable } from '@/components/social-links-table';
+import { ProjectsTable } from '@/components/projects-table';
 import { Navbar } from '@/components/navbar';
 import { logout } from '@/actions/auth';
 import { Button } from '@/components/ui/button';
-import { FolderKanban, Link2, MousePointerClick, LogOut } from 'lucide-react';
+import { FolderKanban, Link2, MousePointerClick, User, Code, Briefcase, LogOut, Search } from 'lucide-react';
 
 export default async function DashboardPage() {
   const stats = await getDashboardStats();
   const { data: shortLinks } = await getShortLinks();
+  const { data: skills } = await getSkills();
+  const { data: experiences } = await getExperiences();
+  const { data: socialLinks } = await getSocialLinks();
+  const { data: projects } = await getProjects();
 
   return (
     <div className="min-h-screen">
@@ -30,12 +43,24 @@ export default async function DashboardPage() {
           </form>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-3 mb-8">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5 mb-8">
           <StatsCard
             title="Total Projects"
             value={stats.projectsCount}
             icon={FolderKanban}
             description="Published projects"
+          />
+          <StatsCard
+            title="Skills"
+            value={stats.skillsCount}
+            icon={Code}
+            description="Technical skills"
+          />
+          <StatsCard
+            title="Experience"
+            value={stats.experiencesCount}
+            icon={Briefcase}
+            description="Work experience"
           />
           <StatsCard
             title="Short Links"
@@ -55,6 +80,28 @@ export default async function DashboardPage() {
           <AddProjectForm />
           <AddShortLinkForm />
         </div>
+
+        <div className="grid gap-6 lg:grid-cols-2 mb-8">
+          <AboutForm />
+          <SeoForm />
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2 mb-8">
+          <AddSkillForm />
+          <AddExperienceForm />
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2 mb-8">
+          <SkillsTable skills={skills || []} />
+          <ExperiencesTable experiences={experiences || []} />
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2 mb-8">
+          <AddSocialLinkForm />
+          <SocialLinksTable links={socialLinks || []} />
+        </div>
+
+        <ProjectsTable projects={projects || []} />
 
         <ShortLinksTable links={shortLinks || []} />
       </div>
