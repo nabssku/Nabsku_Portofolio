@@ -23,7 +23,7 @@ export function Navbar({ isAuthenticated }: NavbarProps) {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center space-x-2">
           <Code2 className="h-6 w-6" />
-          <span className="text-xl font-bold">Portfolio</span>
+          <span className="text-xl font-bold">Nabsku</span>
         </Link>
 
         <div className="flex items-center gap-4">

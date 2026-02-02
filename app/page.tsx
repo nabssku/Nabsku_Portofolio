@@ -101,10 +101,10 @@ export default async function Home() {
         <div className="container mx-auto max-w-6xl text-center relative z-10">
           <div className="animate-fade-in-up">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent animate-gradient-x">
-              Full Stack Developer
+              Nabil Sahsada Suratno - Full Stack Developer
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-              Building modern web applications with cutting-edge technologies
+              Tetap berkembang dan berinovasi di dunia teknologi dengan portofolio saya.
             </p>
           </div>
           <div className="flex gap-4 justify-center flex-wrap">
